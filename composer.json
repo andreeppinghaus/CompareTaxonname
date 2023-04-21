@@ -1,0 +1,22 @@
+{
+    "name" : "andreeppinghaus/compare-taxon-name",
+	"description" : "Compare taxons names with Gender, Epithet, subsp., var.",
+	"type" : "library",
+    "license" : "AGPL-3.0-or-later",
+    "autoload" : {
+		"psr-4" : {
+			"CompareTaxonName\\" : "src/CompareTaxonName"
+		}
+	},
+    "authors" : [{
+        "name" : "Andre Eppinghaus",
+        "email" : "andreeppinghaus@gmail.com"
+    }],
+    "minimum-stability" : "dev",
+    "scripts" : {
+        "test" : "./vendor/bin/phpunit"
+    },
+    "require-dev": {
+            "phpunit/phpunit": "^9"
+        }
+}
