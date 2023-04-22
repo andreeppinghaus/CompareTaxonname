@@ -34,7 +34,7 @@ final class CompareTaxonNameTest extends TestCase
     public function additionProvider(): array
     {
         $search = "Caryocar brasiliense subsp. intermedium (Wittm.) Prance & Freitas";
-        $search = "Caryocar glabrum subsp. glabrum (Aubl.) Pers.";
+        $search = "Caryocar glabrum2 var. testname (Aubl.) Pers.";
 
         return [
             [
@@ -100,14 +100,23 @@ final class CompareTaxonNameTest extends TestCase
             [
                 "Caryocar glabrum subsp. glabrum (Aubl.) Pers.",
                 $search, 
-                true
+                false
             ],
             [
                 "Caryocar glabrum (Aubl.) Pers. subsp. glabrum (Aubl.) Pers.",
                 $search, 
+                false
+            ],
+            [
+                "Caryocar glabrum2 (Aubl.) Pers. subsp. glabrum1 var. testname (Aubl.) Pers.",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar glabrum2 var. testname (Aubl.) Pers.",
+                $search, 
                 true
             ],
-
            
         ];
     }

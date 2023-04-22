@@ -69,46 +69,45 @@ class CompareTaxonName {
          
          $found=true;
   
-         echo "\n encontrou genero e epiteto";
+         // echo "\n encontrou genero e epiteto";
          
          //existe subspecie ?
        // erro aqui tem que retornar falso se uma das duas cndicoes foram verdadeiras
         if ($foundSppSearch !== false && $foundSppSource !== false) {
-         echo "\n encontrou subsp. nos dois";
-         echo "\n source: ".$explodeNameSource[$foundSppSource+1];
-         echo "\n search: ".$explodeNameSearch[$foundSppSearch+1];
+         // echo "\n encontrou subsp. nos dois";
+         // echo "\n source: ".$explodeNameSource[$foundSppSource+1];
+         // echo "\n search: ".$explodeNameSearch[$foundSppSearch+1];
 
             if ($explodeNameSource[$foundSppSource+1]==$explodeNameSearch[$foundSppSearch+1]) {
-               echo "\n encontrou nome";
+               // echo "\n encontrou nome";
                $found=true;
             }else {
-               echo "\n nao encontrou nome";
+               // echo "\n nao encontrou nome";
                $found=false; //nao tem o mesmo nome
             }
            
         }else if ($foundSppSearch !== false || $foundSppSource !== false) {
-           echo '\n nao existe spp ou var';
+         //   echo '\n nao existe spp e var';
             $found=false;
         }//fim verifica subespecie
 
          //existe variedade ?
         if ($foundVarSearch !== false && $foundVarSource !== false) {
-        //verifica se variedade esta na mesma posicao
-        echo "\n encontrou var. nos dois";
-        echo "\n source: ".$explodeNameSource[$foundSppSource+1];
-        echo "\n search: ".$explodeNameSearch[$foundSppSearch+1];
+      //   echo "\n encontrou var. nos dois";
+      //   echo "\n source: ".$explodeNameSource[$foundSppSource+1];
+      //   echo "\n search: ".$explodeNameSearch[$foundSppSearch+1];
 
               //verifica se tem mesmo nome
               if ($explodeNameSource[$foundSppSource+1]==$explodeNameSearch[$foundSppSearch+1]) {
-               echo "\n encontrou nome var.";
-                 $found=true;
+                  // echo "\n encontrou nome var.";
+                  $found=true;
               }else {
-               echo "\n encontrou nome var.";
-                 $found=false; //nao existe o mesmo nome
+                  // echo "\n nao encontrou nome var.";
+                  $found=false; //nao existe o mesmo nome
              }
           
         }else if ($foundVarSearch !== false || $foundVarSource !== false) {
-         echo "\n nao encontrou variedade";
+         // echo "\n nao encontrou variedade";
             $found=false;
         }//fim verifica variedade
      }//fim verifica generoe epiteto
