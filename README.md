@@ -6,7 +6,7 @@ composer require andreeppinghaus/compare-taxon-name
 
 ## Example
 
-
+```
 use CompareTaxonName\CompareTaxonName;
 
 $compareTaxonName = new CompareTaxonName();
@@ -21,3 +21,4 @@ if ( $compareTaxonName->compare(
                 }else {
                     echo "not found";
                 }
+```
