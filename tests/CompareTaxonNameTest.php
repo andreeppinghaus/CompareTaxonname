@@ -1,22 +1,115 @@
 <?php declare(strict_types=1);
+require_once __DIR__ . '/../autoload.php'; 
+
 use PHPUnit\Framework\TestCase;
 use CompareTaxonName\CompareTaxonName;
 
-final class EmailTest extends TestCase
+final class CompareTaxonNameTest extends TestCase
 {
-    public function testCanBeCreatedFromValidEmail(): void
+
+    private static $compareTaxonName;
+
+    public static function setUpBeforeClass(): void
     {
-        $string = 'user@example.com';
-
-        $email = new CompareTaxonName();
-
-        $this->assertSame($string, $email->asString());
+        self::$compareTaxonName = new CompareTaxonName();
     }
 
-    public function testCannotBeCreatedFromInvalidEmail(): void
+    /**
+     * @dataProvider additionProvider
+     */
+    public function testCompare(string $scientificNameSource, 
+                                string $scientificNameSearch, 
+                                bool $expected
+                                ): void
     {
-        $this->expectException(InvalidArgumentException::class);
-
-        Email::fromString('invalid');
+        $this->assertSame(
+            $expected, 
+            self::$compareTaxonName->compare(
+                $scientificNameSource,
+                $scientificNameSearch
+                )
+            );
     }
+
+    public function additionProvider(): array
+    {
+        $search = "Caryocar brasiliense subsp. intermedium (Wittm.) Prance & Freitas";
+        $search = "Caryocar glabrum subsp. glabrum (Aubl.) Pers.";
+
+        return [
+            [
+                "Caryocar brasiliense subsp. intermedium (Wittm.) Prance & Freitas",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar cuneatum Wittm.",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar dentatum Gleason",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar glabrum (Aubl.) Pers.",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar glabrum subsp. album Prance & M.F.Silva",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar glabrum subsp. parviflorum (A.C.Sm.) Prance & M.F.Silva",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar gracile Wittm.",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar microcarpum Ducke",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar montanum Prance",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar nuciferum L.",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar pallidum A.C.Sm.",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar villosum (Aubl.) Pers.",
+                $search, 
+                false
+            ],
+            [
+                "Caryocar glabrum subsp. glabrum (Aubl.) Pers.",
+                $search, 
+                true
+            ],
+            [
+                "Caryocar glabrum (Aubl.) Pers. subsp. glabrum (Aubl.) Pers.",
+                $search, 
+                true
+            ],
+
+           
+        ];
+    }
+
 }
